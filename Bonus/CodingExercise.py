@@ -1,28 +1,23 @@
-import random
+# File Zipper titled Window
+# Select files to compress: # Choose Button, opens up file explorer, multi-select
+# Select destination folder: # Choose Button, open up a directory
+# Compress Button
 
+import FreeSimpleGUI as gui
 
-def parse(user_input):
-    """Extract the values split by a comma in a string
-    and return the two values via a dictionary.
-    """
-    # Get the two values in a list
-    parts = user_input.split(",")
+label1 = gui.Text("Enter feet: ")
+label2 = gui.Text("Enter inches ")
+input_box1 = gui.Input()
+input_box2 = gui.Input()
+compress = gui.Button("Convert")
+compress_button = gui.Button("Compression was completed!")
 
-    # Store the two values in variables
-    lower_bound = int(parts[0])
-    upper_bound = int(parts[1])
+window = gui.Window('File Zipper',
+                    layout=[
+                        [label1, input_box1],
+                        [label2, input_box2],
+                        [compress]
+                    ])
 
-    # Inject the values in a dictionary
-    return {"lower_bound": lower_bound, "upper_bound": upper_bound}
-
-
-# Ask the user to enter a lower and an upper bound divided by a comma
-user_input = input("Enter a lower bound and an upper bound divided a comma (e.g., 2,10)")
-
-# Parse the user string by calling the parse function
-parsed = parse(user_input)
-
-# Pick a random int between the two numbers
-rand = random.randint(parsed['lower_bound'], parsed['upper_bound'])
-
-print(rand)
+window.read()
+window.close()
