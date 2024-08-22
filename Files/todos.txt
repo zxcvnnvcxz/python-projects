@@ -1,7 +1,2 @@
-Add A New Member
-Make Soup
-Make Pizza
-Make some noise
-Do something
-Do something else
-Master Python!
+Make some music
+Kill the King
