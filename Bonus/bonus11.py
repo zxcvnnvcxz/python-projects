@@ -21,5 +21,9 @@ window = gui.Window('File Zipper',
                         [compress]
                     ])
 
+while True:
+    event, values = window.read()
+    filepaths = values["Choose"]
+
 window.read()
 window.close()
