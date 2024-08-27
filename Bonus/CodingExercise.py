@@ -1,23 +1,28 @@
-# File Zipper titled Window
-# Select files to compress: # Choose Button, opens up file explorer, multi-select
-# Select destination folder: # Choose Button, open up a directory
-# Compress Button
+import FreeSimpleGUI as sg
 
-import FreeSimpleGUI as gui
 
-label1 = gui.Text("Enter feet: ")
-label2 = gui.Text("Enter inches ")
-input_box1 = gui.Input()
-input_box2 = gui.Input()
-compress = gui.Button("Convert")
-compress_button = gui.Button("Compression was completed!")
+def km_to_miles(km):
+    return km / 1.6
 
-window = gui.Window('File Zipper',
-                    layout=[
-                        [label1, input_box1],
-                        [label2, input_box2],
-                        [compress]
-                    ])
 
-window.read()
+label = sg.Text("Kilometers: ")
+input_box = sg.InputText(tooltip="Enter todo", key="kms")
+miles_button = sg.Button("Convert")
+
+output = sg.Text(key="output")
+
+window = sg.Window('Km to Miles Converter',
+                   layout=[[label, input_box], [miles_button, output]],
+                   font=('Helvetica', 20))
+
+while True:
+    event, values = window.read()
+    match event:
+        case "Convert":
+            km = float(values["kms"])
+            result = km_to_miles(km)
+            window['output'].update(value=result)
+        case sg.WIN_CLOSED:
+            break
+
 window.close()
