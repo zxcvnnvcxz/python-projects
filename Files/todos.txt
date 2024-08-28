@@ -1,6 +1,3 @@
-add
-Make a new todo
-Do something to do the todo
-Do something to do the todo dont
-Do something to do the todo dont
-123
+Make something
+Make something
+asd

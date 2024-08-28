@@ -31,7 +31,7 @@ while True:
     match event:
         case "Add":
             todos = functions.get_todos()
-            new_todo = values['todo'] + "\n"
+            new_todo = values['todo'].strip() + "\n"
             todos.append(new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
@@ -50,7 +50,7 @@ while True:
                 window['todo'].update(value='')
 
             except IndexError:
-                #window["output"].update(value="Please select an item first.")
+                # window["output"].update(value="Please select an item first.")
                 gui.popup("Please select an item first.", font=('Helvetica', 20))
 
         case "Complete":
@@ -68,7 +68,7 @@ while True:
 
         case 'todos':
             try:
-                window['todo'].update(value=values['todos'][0])
+                window['todo'].update(value=values['todos'][0].strip())
             except IndexError:
                 window["output"].update(value="No item.")
         case "Exit":
