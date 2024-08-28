@@ -7,7 +7,9 @@ gui.theme("DarkPurple4")
 clock = gui.Text('', key="clock")
 label = gui.Text("Type in a to-do")
 input_box = gui.InputText(tooltip="Enter todo", key="todo")
-add_button = gui.Button("Add")
+add_button = gui.Button(key='Add', size=2, image_source="./Files/add.png", mouseover_colors='LightBlue2',
+                        tooltip="Add Todo")
+
 list_box = gui.Listbox(values=functions.get_todos(), key='todos',
                        enable_events=True, size=[45, 10])
 edit_button = gui.Button("Edit")
@@ -25,6 +27,7 @@ window = gui.Window('My To-Do App',
 
 while True:
     event, values = window.read(timeout=500)
+    print(event, values)
     match event:
         case "Add":
             todos = functions.get_todos()
@@ -32,17 +35,20 @@ while True:
             todos.append(new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
+            window['todo'].update(value='')
 
         case "Edit":
             try:
                 todo_to_edit = values['todos'][0]
-                new_todo = values['todo']
+                new_todo = values['todo'].strip() + "\n"
 
                 todos = functions.get_todos()
                 index = todos.index(todo_to_edit)
                 todos[index] = new_todo
                 functions.write_todos(todos)
                 window['todos'].update(values=todos)
+                window['todo'].update(value='')
+
             except IndexError:
                 #window["output"].update(value="Please select an item first.")
                 gui.popup("Please select an item first.", font=('Helvetica', 20))
@@ -57,10 +63,14 @@ while True:
                 window['todo'].update(value='')
             except IndexError:
                 window["output"].update(value="Please select an item first.")
+            except ValueError:
+                window["output"].update(value="No item.")
 
         case 'todos':
-            window['todo'].update(value=values['todos'][0])
-
+            try:
+                window['todo'].update(value=values['todos'][0])
+            except IndexError:
+                window["output"].update(value="No item.")
         case "Exit":
             break
 
