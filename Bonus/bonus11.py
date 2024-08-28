@@ -32,6 +32,5 @@ while True:
             break
 
 
-window.read()
 window.close()
 
