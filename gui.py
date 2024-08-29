@@ -1,13 +1,18 @@
 import functions
 import FreeSimpleGUI as gui
 import time
+import os
+
+if not os.path.exists("./todos.txt"):
+    with open("./todos.txt", "w") as file:
+        pass
 
 gui.theme("DarkPurple4")
 
 clock = gui.Text('', key="clock")
 label = gui.Text("Type in a to-do")
 input_box = gui.InputText(tooltip="Enter todo", key="todo")
-add_button = gui.Button(key='Add', size=2, image_source="./Files/add.png", mouseover_colors='LightBlue2',
+add_button = gui.Button("Add", key='Add', mouseover_colors='LightBlue2',
                         tooltip="Add Todo")
 
 list_box = gui.Listbox(values=functions.get_todos(), key='todos',

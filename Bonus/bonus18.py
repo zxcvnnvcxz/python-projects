@@ -20,7 +20,7 @@ window = sg.Window("Archive Extractor",
 
 while True:
     event, values = window.read()
-    archivepath = values["arhhhhhhhhhhhhchive"]
+    archivepath = values["arhchive"]
     dest_dir = values["folder"]
     extract_archive(archivepath, dest_dir)
     window["output"].update(value="File extracted!")
