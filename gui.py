@@ -1,5 +1,5 @@
 import functions
-import FreeSimpleGUI as gui
+import FreeSimpleGUI as sG
 import time
 import os
 
@@ -7,28 +7,28 @@ if not os.path.exists("./todos.txt"):
     with open("./todos.txt", "w") as file:
         pass
 
-gui.theme("DarkPurple4")
+sG.theme("DarkPurple4")
 
-clock = gui.Text('', key="clock")
-label = gui.Text("Type in a to-do")
-input_box = gui.InputText(tooltip="Enter todo", key="todo")
-add_button = gui.Button("Add", key='Add', mouseover_colors='LightBlue2',
-                        tooltip="Add Todo")
+clock = sG.Text('', key="clock")
+label = sG.Text("Type in a to-do")
+input_box = sG.InputText(tooltip="Enter todo", key="todo")
+add_button = sG.Button("Add", key='Add', mouseover_colors='LightBlue2',
+                       tooltip="Add Todo")
 
-list_box = gui.Listbox(values=functions.get_todos(), key='todos',
-                       enable_events=True, size=[45, 10])
-edit_button = gui.Button("Edit")
-complete_button = gui.Button("Complete")
-exit_button = gui.Button("Exit")
-output_label = gui.Text(key="output", text_color="red")
+list_box = sG.Listbox(values=functions.get_todos(), key='todos',
+                      enable_events=True, size=[45, 10])
+edit_button = sG.Button("Edit")
+complete_button = sG.Button("Complete")
+exit_button = sG.Button("Exit")
+output_label = sG.Text(key="output", text_color="red")
 
-window = gui.Window('My To-Do App',
-                    layout=[[clock],
+window = sG.Window('My To-Do App',
+                   layout=[[clock],
                             [label],
                             [input_box, add_button],
                             [list_box, edit_button, complete_button],
                             [exit_button, output_label]],
-                    font=('Helvetica', 20))
+                   font=('Helvetica', 20))
 
 while True:
     event, values = window.read(timeout=500)
@@ -56,7 +56,7 @@ while True:
 
             except IndexError:
                 # window["output"].update(value="Please select an item first.")
-                gui.popup("Please select an item first.", font=('Helvetica', 20))
+                sG.popup("Please select an item first.", font=('Helvetica', 20))
 
         case "Complete":
             try:
@@ -79,7 +79,7 @@ while True:
         case "Exit":
             break
 
-        case gui.WIN_CLOSED:
+        case sG.WIN_CLOSED:
             break
 
     window["clock"].update(value=time.strftime("%b %d, %Y, %H:%M:%S"))
