@@ -7,4 +7,4 @@ if __name__ == "__main__":
     string = "A man, a plan, a canal: Panama"
     string1 = "race a car"
     string2 = "0P"
-    print(isPalindrome(string2))
+    print(isPalindrome(string))
